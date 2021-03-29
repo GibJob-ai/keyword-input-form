@@ -18,6 +18,18 @@ const onwarn = (warning, onwarn) =>
 	(warning.code === 'CIRCULAR_DEPENDENCY' && /[/\\]@sapper[/\\]/.test(warning.message)) ||
 	onwarn(warning);
 
+
+import sveltePreprocess from 'svelte-preprocess';
+
+const preprocess = sveltePreprocess({
+  scss: {
+    includePaths: ['src'],
+  },
+  postcss: {
+    plugins: [require('autoprefixer')],
+  },
+});
+
 export default {
 	client: {
 		input: config.client.input(),
@@ -34,7 +46,8 @@ export default {
 				compilerOptions: {
 					dev,
 					hydratable: true
-				}
+				},
+				preprocess,
 			}),
 			url({
 				sourceDir: path.resolve(__dirname, 'src/node_modules/images'),
@@ -89,7 +102,8 @@ export default {
 					generate: 'ssr',
 					hydratable: true
 				},
-				emitCss: false
+				emitCss: true,
+				preprocess,
 			}),
 			url({
 				sourceDir: path.resolve(__dirname, 'src/node_modules/images'),
