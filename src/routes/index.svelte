@@ -1,5 +1,5 @@
 <script>
-	import Form from '../components/form.svelte';
+	import KeywordInputForm from '../components/keyword_input_form/keyword_input_form.svelte';
 </script>
 
 <style>
@@ -37,10 +37,7 @@
 </style>
 
 <svelte:head>
-	<title>Sapper project template</title>
+	<title>keyword input form</title>
 </svelte:head>
 
-<h1>Great success!</h1>
-<Form/>
-
-
+<KeywordInputForm/>
